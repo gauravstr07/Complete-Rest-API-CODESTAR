@@ -1,4 +1,5 @@
 const express = require("express");
+const mongodb = require("mongodb");
 const dbConnect = require("./mongodb");
 
 const app = express();
@@ -35,7 +36,7 @@ try {
     let result = await data.updateOne(
       {
         name: req.params.name,
-      },    
+      },
       { $set: req.body }
     );
     console.log(req.body);
@@ -43,6 +44,20 @@ try {
   });
 } catch (err) {
   console.log(err);
+}
+
+// Delete Data from MongoDB
+
+try {
+  app.delete("/:id", async(req, res) => {
+    let data = await dbConnect();
+    let result = await data.deleteOne({
+      _id: new mongodb.ObjectId(req.params.id),
+    });
+    res.send(result);
+  });
+} catch (error) {
+  console.log(error);
 }
 
 app.listen(port, () => {
