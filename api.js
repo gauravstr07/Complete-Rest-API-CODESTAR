@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 const port = 5000;
 
-// Read Data from MongoDB
+// Read Data from MongoDB 
 try {
   app.get("/", async (req, res) => {
     let data = await dbConnect();
