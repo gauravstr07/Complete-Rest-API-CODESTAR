@@ -49,7 +49,7 @@ try {
 // Delete Data from MongoDB
 
 try {
-  app.delete("/:id", async(req, res) => {
+  app.delete("/:id", async (req, res) => {
     let data = await dbConnect();
     let result = await data.deleteOne({
       _id: new mongodb.ObjectId(req.params.id),
